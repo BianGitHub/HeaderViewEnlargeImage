@@ -20,6 +20,7 @@ NSString *const cellID = @"cellID";
     UIView *_headerView;
     UIImageView *_headerImageView;
     UIView *_lineView;
+    UIStatusBarStyle _statusBarStyle;
 }
 
 - (void)viewDidLoad {
@@ -32,10 +33,12 @@ NSString *const cellID = @"cellID";
     
     [self setTableView];
     [self setHeaderView];
+    
+    _statusBarStyle = UIStatusBarStyleLightContent;
 }
     // 修改状态栏样式
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return _statusBarStyle;
 }
     
     //视图将要出现时隐藏导航栏
@@ -115,6 +118,7 @@ NSString *const cellID = @"cellID";
         //  调整headerView 和 headerImageView
         _headerView.bl_y = 0;
         _headerView.bl_height = kHeaderViewHeight - offset;
+        _headerView.alpha = 1;
         
     } else {
 //        NSLog(@"整体移动");
@@ -127,8 +131,13 @@ NSString *const cellID = @"cellID";
         // 设置透明度
 //        NSLog(@"%f", offset / min);
         // 根据输出可以知道  offset / min == 1 不可见
-        _headerImageView.alpha = 1 - (offset / min);
+        CGFloat progress = 1 - (offset / min);
+        _headerImageView.alpha = progress;
         
+        // 根据透明度修改状态栏颜色
+        _statusBarStyle = (progress < 0.5) ? UIStatusBarStyleDefault:UIStatusBarStyleLightContent;
+        // 主动更新状态栏
+        [self.navigationController setNeedsStatusBarAppearanceUpdate];
     }
     
     _headerImageView.bl_height = _headerView.bl_height;

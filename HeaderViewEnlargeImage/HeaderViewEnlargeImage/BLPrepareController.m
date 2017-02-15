@@ -103,8 +103,7 @@ NSString *const cellID = @"cellID";
     CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
 //    NSLog(@"%f", offset);
     if (offset <= 0) {
-        NSLog(@"放大");
-        
+//        NSLog(@"放大");
         //  调整headerView 和 headerImageView
         _headerView.bl_y = 0;
         _headerView.bl_height = kHeaderViewHeight - offset;
@@ -112,6 +111,10 @@ NSString *const cellID = @"cellID";
         
     } else {
         NSLog(@"整体移动");
+        _headerView.bl_height = kHeaderViewHeight;
+        _headerImageView.bl_height = _headerView.bl_height;
+        
+        _headerView.bl_y = -offset;
     }
 }
     

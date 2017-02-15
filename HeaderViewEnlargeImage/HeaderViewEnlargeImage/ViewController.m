@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "BLPrepareController.h"
 
 @interface ViewController ()
 
@@ -21,7 +22,9 @@
     
 - (IBAction)prepareTableView:(UIBarButtonItem *)sender {
     
+    BLPrepareController *pc = [[BLPrepareController alloc] init];
     
+    [self.navigationController pushViewController:pc animated:YES];
 }
 
 

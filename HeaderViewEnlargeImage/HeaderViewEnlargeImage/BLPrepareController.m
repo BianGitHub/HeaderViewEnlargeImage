@@ -19,6 +19,7 @@ NSString *const cellID = @"cellID";
 @implementation BLPrepareController {
     UIView *_headerView;
     UIImageView *_headerImageView;
+    UIView *_lineView;
 }
 
 - (void)viewDidLoad {
@@ -61,6 +62,12 @@ NSString *const cellID = @"cellID";
     _headerImageView.clipsToBounds = YES;
     
     [_headerView addSubview:_headerImageView];
+    
+    // 加载分割线 1个像素点
+    CGFloat lineHeight = 1 / [UIScreen mainScreen].scale;
+    _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeaderViewHeight - lineHeight, _headerView.bl_width, lineHeight)];
+    _lineView.backgroundColor = [UIColor lightGrayColor];
+    [_headerView addSubview:_lineView];
     
     NSURL *url = [NSURL URLWithString:@"http://www.who.int/entity/campaigns/immunization-week/2015/large-web-banner.jpg?ua=1"];
     
@@ -108,12 +115,10 @@ NSString *const cellID = @"cellID";
         //  调整headerView 和 headerImageView
         _headerView.bl_y = 0;
         _headerView.bl_height = kHeaderViewHeight - offset;
-        _headerImageView.bl_height = _headerView.bl_height;
         
     } else {
 //        NSLog(@"整体移动");
         _headerView.bl_height = kHeaderViewHeight;
-        _headerImageView.bl_height = _headerView.bl_height;
         
         // headerView y最小值
         CGFloat min = kHeaderViewHeight - 64;
@@ -125,6 +130,11 @@ NSString *const cellID = @"cellID";
         _headerImageView.alpha = 1 - (offset / min);
         
     }
+    
+    _headerImageView.bl_height = _headerView.bl_height;
+    
+    // 设置分割线的位置
+    _lineView.bl_y = _headerView.bl_height - _lineView.bl_height;
 }
     
     

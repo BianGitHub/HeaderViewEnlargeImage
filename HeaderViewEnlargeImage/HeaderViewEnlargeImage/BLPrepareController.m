@@ -9,6 +9,7 @@
 #import "BLPrepareController.h"
 
 NSString *const cellID = @"cellID";
+#define kHeaderViewHeight 200
 @interface BLPrepareController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -21,8 +22,22 @@ NSString *const cellID = @"cellID";
     self.view.backgroundColor = [UIColor redColor];
     
     [self setTableView];
+    [self setHeaderView];
 }
 
+    //视图将要出现时隐藏状态栏
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+    
+- (void)setHeaderView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kHeaderViewHeight)];
+    view.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:view];
+}
+    
 - (void)setTableView {
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];

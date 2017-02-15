@@ -21,11 +21,18 @@ NSString *const cellID = @"cellID";
     
     self.view.backgroundColor = [UIColor redColor];
     
+    // 禁止调整顶部缩进
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self setTableView];
     [self setHeaderView];
 }
-
-    //视图将要出现时隐藏状态栏
+    // 修改状态栏样式
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+    
+    //视图将要出现时隐藏导航栏
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -39,7 +46,6 @@ NSString *const cellID = @"cellID";
 }
     
 - (void)setTableView {
-    
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
@@ -47,6 +53,9 @@ NSString *const cellID = @"cellID";
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
     
     [self.view addSubview:tableView];
+    
+    // 调整表格视图顶部间距
+    tableView.contentInset = UIEdgeInsetsMake(kHeaderViewHeight, 0, 0, 0);
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

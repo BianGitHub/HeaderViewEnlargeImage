@@ -8,6 +8,7 @@
 
 #import "BLPrepareController.h"
 #import "YYWebImage.h"
+#import "UIView+Category.h"
 
 NSString *const cellID = @"cellID";
 #define kHeaderViewHeight 200
@@ -15,7 +16,10 @@ NSString *const cellID = @"cellID";
 
 @end
 
-@implementation BLPrepareController
+@implementation BLPrepareController {
+    UIView *_headerView;
+    UIImageView *_headerImageView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,21 +45,28 @@ NSString *const cellID = @"cellID";
 }
     
 - (void)setHeaderView {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kHeaderViewHeight)];
-    view.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:view];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kHeaderViewHeight)];
+    _headerView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_headerView];
     
     // 顶部视图添加imageVIew
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-    imageView.backgroundColor = [UIColor blueColor];
-    [view addSubview:imageView];
+    _headerImageView = [[UIImageView alloc] initWithFrame:_headerView.bounds];
+    _headerImageView.backgroundColor = [UIColor blueColor];
+    
+    // 设置contentMode
+    _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    // 设置图像裁切
+    _headerImageView.clipsToBounds = YES;
+    
+    [_headerView addSubview:_headerImageView];
     
     NSURL *url = [NSURL URLWithString:@"http://www.who.int/entity/campaigns/immunization-week/2015/large-web-banner.jpg?ua=1"];
     
     // YYWebImageOptionShowNetworkActivity 表示带网络指示器
     // 在此, 使用YYWebImage的好处就是他带有网络指示器, 而SD没有此功能
     // AFN也可以实现添加图片的功能, 而且也带有网络指示器  但是 如果图片太大, 有可能不会缓存, 并且他使用的是系统默认的缓存
-    [imageView yy_setImageWithURL:url options:YYWebImageOptionShowNetworkActivity];
+    [_headerImageView yy_setImageWithURL:url options:YYWebImageOptionShowNetworkActivity];
 }
     
 - (void)setTableView {
@@ -85,4 +96,24 @@ NSString *const cellID = @"cellID";
     cell.textLabel.text = @(indexPath.row).stringValue;
     return cell;
 }
+    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+//    NSLog(@"%f", scrollView.contentOffset.y);
+    CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
+//    NSLog(@"%f", offset);
+    if (offset <= 0) {
+        NSLog(@"放大");
+        
+        //  调整headerView 和 headerImageView
+        _headerView.bl_y = 0;
+        _headerView.bl_height = kHeaderViewHeight - offset;
+        _headerImageView.bl_height = _headerView.bl_height;
+        
+    } else {
+        NSLog(@"整体移动");
+    }
+}
+    
+    
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "BLPrepareController.h"
+#import "YYWebImage.h"
 
 NSString *const cellID = @"cellID";
 #define kHeaderViewHeight 200
@@ -43,6 +44,18 @@ NSString *const cellID = @"cellID";
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kHeaderViewHeight)];
     view.backgroundColor = [UIColor grayColor];
     [self.view addSubview:view];
+    
+    // 顶部视图添加imageVIew
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
+    imageView.backgroundColor = [UIColor blueColor];
+    [view addSubview:imageView];
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.who.int/entity/campaigns/immunization-week/2015/large-web-banner.jpg?ua=1"];
+    
+    // YYWebImageOptionShowNetworkActivity 表示带网络指示器
+    // 在此, 使用YYWebImage的好处就是他带有网络指示器, 而SD没有此功能
+    // AFN也可以实现添加图片的功能, 而且也带有网络指示器  但是 如果图片太大, 有可能不会缓存, 并且他使用的是系统默认的缓存
+    [imageView yy_setImageWithURL:url options:YYWebImageOptionShowNetworkActivity];
 }
     
 - (void)setTableView {

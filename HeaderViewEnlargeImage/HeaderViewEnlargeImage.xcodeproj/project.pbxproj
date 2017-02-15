@@ -14,6 +14,7 @@
 		11B85C051E54077F00107C37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B85C041E54077F00107C37 /* Assets.xcassets */; };
 		11B85C081E54077F00107C37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B85C061E54077F00107C37 /* LaunchScreen.storyboard */; };
 		11B85C111E5408E400107C37 /* BLPrepareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B85C101E5408E400107C37 /* BLPrepareController.m */; };
+		11B85C141E54825500107C37 /* UINavigationController+Runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B85C131E54825500107C37 /* UINavigationController+Runtime.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		11B85C091E54077F00107C37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11B85C0F1E5408E400107C37 /* BLPrepareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLPrepareController.h; sourceTree = "<group>"; };
 		11B85C101E5408E400107C37 /* BLPrepareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLPrepareController.m; sourceTree = "<group>"; };
+		11B85C121E54825500107C37 /* UINavigationController+Runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Runtime.h"; sourceTree = "<group>"; };
+		11B85C131E54825500107C37 /* UINavigationController+Runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Runtime.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,8 @@
 		11B85BF71E54077F00107C37 /* HeaderViewEnlargeImage */ = {
 			isa = PBXGroup;
 			children = (
+				11B85C121E54825500107C37 /* UINavigationController+Runtime.h */,
+				11B85C131E54825500107C37 /* UINavigationController+Runtime.m */,
 				11B85BFB1E54077F00107C37 /* AppDelegate.h */,
 				11B85BFC1E54077F00107C37 /* AppDelegate.m */,
 				11B85BFE1E54077F00107C37 /* ViewController.h */,
@@ -156,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11B85C001E54077F00107C37 /* ViewController.m in Sources */,
+				11B85C141E54825500107C37 /* UINavigationController+Runtime.m in Sources */,
 				11B85C111E5408E400107C37 /* BLPrepareController.m in Sources */,
 				11B85BFD1E54077F00107C37 /* AppDelegate.m in Sources */,
 				11B85BFA1E54077F00107C37 /* main.m in Sources */,

@@ -1,0 +1,6 @@
+framework module Pods_HeaderViewEnlargeImage {
+  umbrella header "Pods-HeaderViewEnlargeImage-umbrella.h"
+
+  export *
+  module * { export * }
+}

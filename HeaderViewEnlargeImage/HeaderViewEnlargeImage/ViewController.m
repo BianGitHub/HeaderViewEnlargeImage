@@ -27,6 +27,11 @@
     [self.navigationController pushViewController:pc animated:YES];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // 显示导航栏
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 @end

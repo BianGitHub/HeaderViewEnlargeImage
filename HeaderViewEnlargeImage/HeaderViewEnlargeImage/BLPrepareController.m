@@ -46,7 +46,8 @@ NSString *const cellID = @"cellID";
     
 - (void)setHeaderView {
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kHeaderViewHeight)];
-    _headerView.backgroundColor = [UIColor grayColor];
+    // 测量导航栏颜色
+    _headerView.backgroundColor = [UIColor colorWithRed:249 / 255.0 green:249 / 255.0 blue:249 / 255.0 alpha:1];
     [self.view addSubview:_headerView];
     
     // 顶部视图添加imageVIew
@@ -110,11 +111,19 @@ NSString *const cellID = @"cellID";
         _headerImageView.bl_height = _headerView.bl_height;
         
     } else {
-        NSLog(@"整体移动");
+//        NSLog(@"整体移动");
         _headerView.bl_height = kHeaderViewHeight;
         _headerImageView.bl_height = _headerView.bl_height;
         
-        _headerView.bl_y = -offset;
+        // headerView y最小值
+        CGFloat min = kHeaderViewHeight - 64;
+        _headerView.bl_y = -MIN(min, offset);
+        
+        // 设置透明度
+//        NSLog(@"%f", offset / min);
+        // 根据输出可以知道  offset / min == 1 不可见
+        _headerImageView.alpha = 1 - (offset / min);
+        
     }
 }
     
